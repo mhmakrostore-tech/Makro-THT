@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#c2185b" />
+  <title>Makro THT</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loading" class="loading">App laden…</div>
+
+  <section id="loginView" class="center hidden">
+    <div class="login-card">
+      <h1>Makro THT</h1>
+      <p>Persoonlijk systeem voor productdata en vervaldatums.</p>
+      <button id="loginBtn" class="primary big">Inloggen met Google</button>
+      <p class="small">Je gegevens worden per Google-account apart opgeslagen.</p>
+    </div>
+  </section>
+
+  <div id="appView" class="hidden">
+    <header>
+      <div>
+        <h1>Makro THT</h1>
+        <div id="userEmail" class="small"></div>
+      </div>
+      <button id="logoutBtn" class="ghost">Uitloggen</button>
+    </header>
+
+    <nav class="tabs">
+      <button data-tab="dashboard" class="active">Overzicht</button>
+      <button data-tab="register">Product scannen</button>
+      <button data-tab="products">Producten</button>
+    </nav>
+
+    <main>
+      <section id="dashboard" class="tab active">
+        <div class="cards">
+          <div class="card danger"><span>Verlopen</span><strong id="expiredCount">0</strong></div>
+          <div class="card warning"><span>Binnen 30 dagen</span><strong id="soonCount">0</strong></div>
+          <div class="card good"><span>Goed</span><strong id="goodCount">0</strong></div>
+          <div class="card"><span>Totaal registraties</span><strong id="totalCount">0</strong></div>
+        </div>
+        <div class="toolbar">
+          <input id="searchInput" type="search" placeholder="Zoek product of barcode" />
+          <select id="statusFilter">
+            <option value="all">Alle statussen</option>
+            <option value="expired">Verlopen</option>
+            <option value="soon">Binnen 30 dagen</option>
+            <option value="good">Goed</option>
+          </select>
+          <button id="exportBtn" class="secondary">Export naar Excel</button>
+        </div>
+        <div id="entriesList" class="list"></div>
+      </section>
+
+      <section id="register" class="tab">
+        <div class="panel">
+          <h2>Product scannen / THT registreren</h2>
+          <div class="scan-row">
+            <input id="barcode" inputmode="numeric" autocomplete="off" placeholder="Barcode" />
+            <button id="scanBtn" class="secondary">Scan barcode</button>
+          </div>
+          <video id="scannerVideo" class="hidden" playsinline></video>
+          <button id="stopScanBtn" class="ghost hidden">Stop scanner</button>
+
+          <label>Productnaam</label>
+          <input id="productName" autocomplete="off" placeholder="Bijv. Appelmoes Green 360gr" />
+
+          <div class="grid2">
+            <div>
+              <label>THT / vervaldatum</label>
+              <input id="expiryDate" type="date" />
+            </div>
+            <div>
+              <label>Aantal</label>
+              <input id="quantity" type="number" min="0" value="1" />
+            </div>
+          </div>
+
+          <label>Locatie</label>
+          <select id="location">
+            <option>Winkel</option>
+            <option>Magazijn</option>
+            <option>Koeling</option>
+            <option>Vriezer</option>
+            <option>Anders</option>
+          </select>
+
+          <label>Foto product</label>
+          <input id="photoInput" type="file" accept="image/*" capture="environment" />
+          <img id="photoPreview" class="preview hidden" alt="Productfoto" />
+
+          <label>Opmerking</label>
+          <textarea id="notes" rows="3" placeholder="Optioneel"></textarea>
+
+          <button id="saveBtn" class="primary big">Opslaan</button>
+          <div id="formMessage" class="message"></div>
+        </div>
+      </section>
+
+      <section id="products" class="tab">
+        <div class="panel">
+          <h2>Productenlijst</h2>
+          <p class="small">Een product wordt automatisch onthouden na de eerste registratie. Bij dezelfde barcode wordt de naam en foto opnieuw ingevuld.</p>
+          <div id="productsList" class="list"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
