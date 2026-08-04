@@ -1,5 +1,5 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyAz84bwA97vvqv7LrjvYXB17BheRwGM_ms",
+  apiKey: "AIzaSyAz84bwA97vvqv7LrjvYXBI7BheRwGM_ms",
   authDomain: "makro-tht.firebaseapp.com",
   projectId: "makro-tht",
   storageBucket: "makro-tht.firebasestorage.app",
